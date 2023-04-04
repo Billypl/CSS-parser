@@ -22,14 +22,20 @@ int main()
 void listTest()
 {
 	List<int> a;
-	a.add(new node<int>(1));
-	a.add(new node<int>(2));
-	a.add(new node<int>(3));
-	a.add(new node<int>(4));
-	a.print();
-	a.pop();
-	a.print();
-	a.add();
-	a[a.size - 1] = 69;
-	a.print();
+	a.add(1);
+	a.add(1);
+	cout << a[0];
+	cout << a[1];
+	cout << a[2];
+	//a.add(1);
+	//a.add(1);
+	//a.add(1);
+	//a.add(1);
+	//a.add(1);
+	//a.add(1);
+	//a.add(2);
+	//a.pop();
+	//a.pop();
+	//a.pop();
+	//a.print();
 }
