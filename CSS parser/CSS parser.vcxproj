@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="list.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pair.cpp" />
     <ClCompile Include="string.cpp" />

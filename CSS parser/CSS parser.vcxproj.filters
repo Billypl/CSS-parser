@@ -27,6 +27,9 @@
     <ClInclude Include="pair.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="string.cpp">
@@ -40,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="pair.cpp">
       <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="list.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

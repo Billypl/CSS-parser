@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 template <typename T1, typename T2>
 class pair
 {
@@ -15,7 +16,7 @@ public:
 	bool operator!= (const pair<T1, T2>& other) const;
 	bool isEqual	(const pair<T1, T2>& other) const;
 
-	friend std::ostream& operator<<(std::ostream& os, const pair<T1, T2>& p)
+	friend std::ostream& operator<<(std::ostream& os, const pair<T1, T2>& p);
 	void swap		(pair<T1,T2>& other);
 };
 
