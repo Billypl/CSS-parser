@@ -8,22 +8,7 @@ List<T, B_SIZE>::List()
 template<typename T, size_t B_SIZE>
 List<T, B_SIZE>::~List()
 {
-	if (blocksCount == 0)
-		return;
-	else if (blocksCount == 1)
-	{
-		delete end;
-		return;
-	}
-
-	Node<T, B_SIZE>* tmp = start->next;
-	do
-	{
-		delete start;
-		start = tmp;
-		tmp = tmp->next;
-	} while (tmp != nullptr);
-
+	erease();
 }
 
 template<typename T, size_t B_SIZE>
@@ -94,6 +79,14 @@ T& List<T, B_SIZE>::get(size_t index)
 }
 
 template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::operator=(const List& other)
+{
+	erease();
+	for (int i = 0; i < other.getSize(); i++)
+		add(other[i]);
+}
+
+template<typename T, size_t B_SIZE>
 void List<T, B_SIZE>::pop()
 {
 	if (blocksCount == 0 || start->size == 0)
@@ -137,6 +130,25 @@ template<typename T, size_t B_SIZE>
 bool List<T, B_SIZE>::isEmpty()
 {
 	return getSize() == 0;
+}
+
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::erease()
+{
+	if (blocksCount == 0)
+		return;
+	else if (blocksCount == 1)
+	{
+		delete end;
+		return;
+	}
+	Node<T, B_SIZE>* tmp = start->next;
+	do
+	{
+		delete start;
+		start = tmp;
+		tmp = tmp->next;
+	} while (tmp != nullptr);
 }
 
 template<typename T, size_t B_SIZE>

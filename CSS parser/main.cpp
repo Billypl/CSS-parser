@@ -20,33 +20,52 @@ int main()
 {
 	//listTest();
 	sectionsTest();
-
 }
+
+Section createSection();
+Section createSection2();
 
 void sectionsTest()
 {
 	List<Section, BLOCK_SIZE> a;
-	a.add();
-	a[0].attributes.add({ "test", "lol" });
-	a[0].selectors.add("dziala?");
-	cout << a;
+
+	a.add(createSection());
+	a.add(createSection2());
+
+	int i = 0,j = 0;
+	cout << "First: " << a[i].attributes[j].name << endl << endl;
+	cout << "Print whole list:\n" << " " << a;
+}
+
+Section createSection()
+{
+	Section res;
+
+	res.selectors.add("s1");
+	res.attributes.add({ "test1", "lol1" });
+	res.attributes.add({ "test2", "lol2" });
+	return res;
+}
+Section createSection2()
+{
+	Section res;
+
+	res.selectors.add("s2");
+	res.attributes.add({ "test3", "lol3" });
+	res.attributes.add({ "test4", "lol4" });
+	return res;
 }
 
 
 void listTest()
 {
-	List<int, BLOCK_SIZE> a;
+	List<int, BLOCK_SIZE> a, b;
 	a.add(1);
 	a.add(2);
-	a.add(3);
-	a.add(4);
-	a.add(5);
-	a.add(6);
-
-	a.pop();
-	a.pop();
+	b = a;
 
 	//a.pop(a.getSize() - 1);
 	//a.print();
-	cout << a;
+	cout << a << endl;
+	cout << b;
 }

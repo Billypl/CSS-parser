@@ -44,16 +44,3 @@ std::ostream& operator<<(std::ostream& os, const pair<T1, T2>& p)
 	return os;
 }
 
-
-/*
-
-"class basic_ostream<char,struct char_traits<char> > & __cdecl 
-	operator<<<class string,class string> ( class basic_ostream<char,struct char_traits<char> > &,
-											class pair<class string,class string> const &)"
-	referenced in function 
-		"public: void __cdecl List<class pair<class string, class string>,8>::print(void)const " CSS parser	E:\Billy\Pulpit\Uczelnia\sem 2\AiSD\Projekt1 - css\CSS parser\CSS parser\Section.obj	1
-
-
-
-
-*/

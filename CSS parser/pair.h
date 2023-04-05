@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include "string.h"
+
 template <typename T1, typename T2>
 class pair
 {
@@ -21,3 +23,14 @@ public:
 	void swap		(pair<T1,T2>& other);
 };
 
+class Atr : public pair<string, string>
+{
+public:
+	using pair::pair;
+	void operator=(const Atr& other)
+	{
+		return pair<string, string>::operator=(other);
+	}
+	string& name = a;
+	string& value = b;
+};

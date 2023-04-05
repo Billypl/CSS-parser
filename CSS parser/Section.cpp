@@ -14,7 +14,7 @@ Atr& Section::findAtr(string name)
 size_t Section::findAtrIndex(string name)
 {
     for (int i = 0; i < attributes.getSize(); i++)
-        if (attributes[i].a == name)
+        if (attributes[i].name == name)
             return i;
     return -1;
 }

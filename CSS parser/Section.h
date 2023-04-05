@@ -3,7 +3,6 @@
 #include "string.h"
 #include "pair.h"
 
-typedef pair<string, string> Atr;
 typedef List<Atr, BLOCK_SIZE> AtrList;
 typedef List<string, BLOCK_SIZE> SelList;
 
