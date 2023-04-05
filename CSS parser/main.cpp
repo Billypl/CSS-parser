@@ -6,8 +6,8 @@
 #include "pair.h"
 #include "pair.cpp"
 
-#include "list.h"
-#include "list.cpp"
+#include "List.h"
+#include "List.cpp"
 
 using std::cout;
 using std::endl;
@@ -17,11 +17,12 @@ void listTest();
 int main()
 {
 	listTest();
+
 }
 
 void listTest()
 {
-	List<int> a;
+	List<int, BLOCK_SIZE> a;
 	a.add(1);
 	a.add(2);
 	a.add(3);
@@ -29,8 +30,8 @@ void listTest()
 	a.add(5);
 	a.add(6);
 
-	a.pop(2);
-	a.pop(2);
+	a.pop();
+	a.pop();
 
 	//a.pop(a.getSize() - 1);
 	a.print();

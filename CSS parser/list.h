@@ -1,13 +1,14 @@
 #pragma once
 #include <iostream>
-#include "node.h"
-#include "node.cpp"
+#include "Node.h"
+#include "Node.cpp"
+#include <array>
 
-template<typename T>
+template<typename T, size_t B_SIZE>
 class List
 {
-	node<T>* start;
-	node<T>* end;
+	Node<T, B_SIZE>* start;
+	Node<T, B_SIZE>* end;
 	size_t blocksCount;
 
 public:
@@ -25,6 +26,6 @@ public:
 
 private:
 
-	void deleteEmptyNode(node<T>* emptyNode);
+	void deleteEmptyNode(Node<T, B_SIZE>* emptyNode);
 };
 

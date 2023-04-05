@@ -1,15 +1,15 @@
 #pragma once
-#define N 2
+#define BLOCK_SIZE 8
 
 
-template<typename T>
-class node
+template<typename T, size_t B_SIZE>
+class Node
 {
 public:
-	node* prev = nullptr;
-	node* next = nullptr;
-	T items[N];
-	bool filled[N];
+	Node* prev = nullptr;
+	Node* next = nullptr;
+	T items[B_SIZE];
+	bool filled[B_SIZE];
 	size_t size = 0;
 
 	size_t findLastFilledIndex();
@@ -17,7 +17,7 @@ public:
 	void add(const T& item);
 	T& operator[] (size_t index);
 	void pop();
-	node();
+	Node();
 
 	size_t findMappedIndex(size_t index);
 

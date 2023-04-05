@@ -1,12 +1,12 @@
-#include "list.h"
+#include "List.h"
 #include <iostream>
 
-template<typename T>
-List<T>::List()
+template<typename T, size_t B_SIZE>
+List<T, B_SIZE>::List()
 	: start(nullptr), end(nullptr), blocksCount(0) {}
 
-template<typename T>
-List<T>::~List()
+template<typename T, size_t B_SIZE>
+List<T, B_SIZE>::~List()
 {
 	if (blocksCount == 0)
 		return;
@@ -16,7 +16,7 @@ List<T>::~List()
 		return;
 	}
 
-	node<T>* tmp = start->next;
+	Node<T, B_SIZE>* tmp = start->next;
 	do
 	{
 		delete start;
@@ -26,18 +26,19 @@ List<T>::~List()
 
 }
 
-template<typename T>
-void List<T>::add()
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::add()
 {
 	T item;
 	add(item);
 }
-template<typename T>
-void List<T>::add(const T& item)
+
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::add(const T& item)
 {
 	if (blocksCount == 0)
 	{
-		node<T>* tmp = new node<T>;
+		Node<T, B_SIZE>* tmp = new Node<T, B_SIZE>;
 		start = tmp;
 		end = tmp;
 		blocksCount++;
@@ -51,7 +52,7 @@ void List<T>::add(const T& item)
 		}
 		catch (...)
 		{
-			node<T>* tmp = new node<T>;
+			Node<T, B_SIZE>* tmp = new Node<T, B_SIZE>;
 			end->next = tmp;
 			tmp->prev = end;
 
@@ -62,12 +63,12 @@ void List<T>::add(const T& item)
 }
 
 
-template<typename T>
-T& List<T>::operator[](size_t index)
+template<typename T, size_t B_SIZE>
+T& List<T, B_SIZE>::operator[](size_t index)
 {
 	if (index < 0 || index > getSize() - 1)
 		throw "out of bounds!";
-	node<T>* tmp = start;
+	Node<T, B_SIZE>* tmp = start;
 	while (index >= 0)
 	{
 		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
@@ -76,12 +77,12 @@ T& List<T>::operator[](size_t index)
 			tmp = tmp->next;
 		}
 		else
-			return (*tmp)[index % N];
+			return (*tmp)[index % B_SIZE];
 	}
 }
 
-template<typename T>
-void List<T>::pop()
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::pop()
 {
 	if (blocksCount == 0 || start->size == 0)
 		throw "list is empty!";
@@ -89,12 +90,12 @@ void List<T>::pop()
 	end->pop();
 }
 
-template<typename T>
-void List<T>::pop(size_t index)
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::pop(size_t index)
 {
 	if (index < 0 || index > getSize() - 1)
 		throw "out of bounds!";
-	node<T>* tmp = start;
+	Node<T>* tmp = start;
 	while (index >= 0)
 	{
 		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
@@ -104,7 +105,7 @@ void List<T>::pop(size_t index)
 		}
 		else
 		{
-			(*tmp).filled[tmp->findMappedIndex(index % N)] = false;
+			(*tmp).filled[tmp->findMappedIndex(index % B_SIZE)] = false;
 			tmp->size--;
 			deleteEmptyNode(tmp);
 			return;
@@ -112,16 +113,16 @@ void List<T>::pop(size_t index)
 	}
 }
 
-template<typename T>
-void List<T>::print()
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::print()
 {
 	for (int i = 0; i < getSize(); i++)
 		std::cout << (*this)[i] << " ";
 	std::cout << "\n";
 }
 
-template<typename T>
-void List<T>::deleteEmptyNode(node<T>* emptyNode)
+template<typename T, size_t B_SIZE>
+void List<T, B_SIZE>::deleteEmptyNode(Node<T, B_SIZE>* emptyNode)
 {
 	if (emptyNode->size == 0)
 	{
@@ -133,22 +134,22 @@ void List<T>::deleteEmptyNode(node<T>* emptyNode)
 		}
 		else if (emptyNode->next == nullptr) // end of list
 		{
-			node<T>* tmp = emptyNode->prev;
+			Node<T, B_SIZE>* tmp = emptyNode->prev;
 			delete emptyNode;
 			tmp->next = nullptr;
 			end = tmp;
 		}
 		else if (emptyNode->prev == nullptr) // start of list
 		{
-			node<T>* tmp = emptyNode->next;
+			Node<T, B_SIZE>* tmp = emptyNode->next;
 			delete emptyNode;
 			tmp->prev = nullptr;
 			start = tmp;
 		}
 		else // in the middle
 		{
-			node<T>* next = emptyNode->next;
-			node<T>* prev = emptyNode->prev;
+			Node<T, B_SIZE>* next = emptyNode->next;
+			Node<T, B_SIZE>* prev = emptyNode->prev;
 			delete emptyNode;
 			next->prev = prev;
 			prev->next = next;
@@ -157,10 +158,10 @@ void List<T>::deleteEmptyNode(node<T>* emptyNode)
 	}
 }
 
-template<typename T>
-size_t List<T>::getSize()
+template<typename T, size_t B_SIZE>
+size_t List<T, B_SIZE>::getSize()
 {
-	node<T>* tmp = start;
+	Node<T, B_SIZE>* tmp = start;
 	size_t blocksCount = 0;
 	while (tmp != nullptr)
 	{

@@ -128,16 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
-    <ClInclude Include="list.h" />
-    <ClInclude Include="node.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="list.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="node.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="pair.cpp" />
     <ClCompile Include="string.cpp" />
     <ClCompile Include="vector.cpp" />
