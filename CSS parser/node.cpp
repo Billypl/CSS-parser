@@ -2,7 +2,6 @@
 
 template<typename T, size_t B_SIZE>
 size_t Node<T, B_SIZE>::findLastFilledIndex()
-
 {
 	for (int i = B_SIZE - 1; i >= 0; i--)
 		if (filled[i] == true)
@@ -26,7 +25,7 @@ void Node<T, B_SIZE>::add(const T& item)
 template<typename T, size_t B_SIZE>
 T& Node<T, B_SIZE>::operator[](size_t index)
 {
-	if (index < 0 || index >= B_SIZE || index > size)
+	if (index >= B_SIZE || index > size)
 		throw "out of bounds!";
 	size_t i = findMappedIndex(index);
 	if(i == -1)

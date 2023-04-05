@@ -66,7 +66,19 @@ void List<T, B_SIZE>::add(const T& item)
 template<typename T, size_t B_SIZE>
 T& List<T, B_SIZE>::operator[](size_t index)
 {
-	if (index < 0 || index > getSize() - 1)
+	return get(index);
+}
+
+template<typename T, size_t B_SIZE>
+const T& List<T, B_SIZE>::operator[](size_t index) const
+{
+	return const_cast<List*>(this)->get(index);
+}
+
+template<typename T, size_t B_SIZE>
+T& List<T, B_SIZE>::get(size_t index)
+{
+	if (index > getSize() - 1)
 		throw "out of bounds!";
 	Node<T, B_SIZE>* tmp = start;
 	while (index >= 0)
@@ -93,9 +105,9 @@ void List<T, B_SIZE>::pop()
 template<typename T, size_t B_SIZE>
 void List<T, B_SIZE>::pop(size_t index)
 {
-	if (index < 0 || index > getSize() - 1)
+	if (index > getSize() - 1)
 		throw "out of bounds!";
-	Node<T>* tmp = start;
+	Node<T, B_SIZE>* tmp = start;
 	while (index >= 0)
 	{
 		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
@@ -114,11 +126,17 @@ void List<T, B_SIZE>::pop(size_t index)
 }
 
 template<typename T, size_t B_SIZE>
-void List<T, B_SIZE>::print()
+void List<T, B_SIZE>::print() const
 {
 	for (int i = 0; i < getSize(); i++)
 		std::cout << (*this)[i] << " ";
 	std::cout << "\n";
+}
+
+template<typename T, size_t B_SIZE>
+bool List<T, B_SIZE>::isEmpty()
+{
+	return getSize() == 0;
 }
 
 template<typename T, size_t B_SIZE>
@@ -159,17 +177,21 @@ void List<T, B_SIZE>::deleteEmptyNode(Node<T, B_SIZE>* emptyNode)
 }
 
 template<typename T, size_t B_SIZE>
-size_t List<T, B_SIZE>::getSize()
+size_t List<T, B_SIZE>::getSize() const
 {
 	Node<T, B_SIZE>* tmp = start;
-	size_t blocksCount = 0;
+	size_t size = 0;
 	while (tmp != nullptr)
 	{
-		blocksCount += tmp->size;
+		size += tmp->size;
 		tmp = tmp->next;
 	}
-	return blocksCount;
+	return size;
 }
 
-
-
+template<typename T, size_t B_SIZE>
+std::ostream& operator<<(std::ostream& os, const List<T, B_SIZE>& list)
+{
+	list.print();
+	return os;
+}

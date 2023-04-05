@@ -8,17 +8,30 @@
 
 #include "List.h"
 #include "List.cpp"
+#include "Section.h"
 
 using std::cout;
 using std::endl;
 
 void listTest();
+void sectionsTest();
 
 int main()
 {
-	listTest();
+	//listTest();
+	sectionsTest();
 
 }
+
+void sectionsTest()
+{
+	List<Section, BLOCK_SIZE> a;
+	a.add();
+	a[0].attributes.add({ "test", "lol" });
+	a[0].selectors.add("dziala?");
+	cout << a;
+}
+
 
 void listTest()
 {
@@ -34,5 +47,6 @@ void listTest()
 	a.pop();
 
 	//a.pop(a.getSize() - 1);
-	a.print();
+	//a.print();
+	cout << a;
 }
