@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="node.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.h" />
@@ -136,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="node.cpp" />
     <ClCompile Include="pair.cpp" />
     <ClCompile Include="string.cpp" />
     <ClCompile Include="vector.cpp" />

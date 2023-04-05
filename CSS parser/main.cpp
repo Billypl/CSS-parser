@@ -23,19 +23,15 @@ void listTest()
 {
 	List<int> a;
 	a.add(1);
-	a.add(1);
-	cout << a[0];
-	cout << a[1];
-	cout << a[2];
-	//a.add(1);
-	//a.add(1);
-	//a.add(1);
-	//a.add(1);
-	//a.add(1);
-	//a.add(1);
-	//a.add(2);
-	//a.pop();
-	//a.pop();
-	//a.pop();
-	//a.print();
+	a.add(2);
+	a.add(3);
+	a.add(4);
+	a.add(5);
+	a.add(6);
+
+	a.pop(2);
+	a.pop(2);
+
+	//a.pop(a.getSize() - 1);
+	a.print();
 }

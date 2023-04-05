@@ -3,14 +3,14 @@
 
 template<typename T>
 List<T>::List()
-	: start(nullptr), end(nullptr), size(0) {}
+	: start(nullptr), end(nullptr), blocksCount(0) {}
 
 template<typename T>
 List<T>::~List()
 {
-	if (size == 0)
+	if (blocksCount == 0)
 		return;
-	else if (size == 1)
+	else if (blocksCount == 1)
 	{
 		delete end;
 		return;
@@ -35,12 +35,12 @@ void List<T>::add()
 template<typename T>
 void List<T>::add(const T& item)
 {
-	if (size == 0)
+	if (blocksCount == 0)
 	{
 		node<T>* tmp = new node<T>;
 		start = tmp;
 		end = tmp;
-		size++;
+		blocksCount++;
 	}
 
 	while (true)
@@ -56,7 +56,7 @@ void List<T>::add(const T& item)
 			tmp->prev = end;
 
 			end = tmp;
-			size++;
+			blocksCount++;
 		}
 	}
 }
@@ -65,15 +65,15 @@ void List<T>::add(const T& item)
 template<typename T>
 T& List<T>::operator[](size_t index)
 {
-	if (index > getTotalSize() - 1)
+	if (index < 0 || index > getSize() - 1)
 		throw "out of bounds!";
 	node<T>* tmp = start;
 	while (index >= 0)
 	{
-		if (index >= N && tmp->size == N && tmp->next != nullptr)
+		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
 		{
+			index -= tmp->size;
 			tmp = tmp->next;
-			index -= N;
 		}
 		else
 			return (*tmp)[index % N];
@@ -83,47 +83,91 @@ T& List<T>::operator[](size_t index)
 template<typename T>
 void List<T>::pop()
 {
-	if (size == 0 || start->size == 0)
+	if (blocksCount == 0 || start->size == 0)
 		throw "list is empty!";
-	else if (end->size == 0)
+	deleteEmptyNode(end);
+	end->pop();
+}
+
+template<typename T>
+void List<T>::pop(size_t index)
+{
+	if (index < 0 || index > getSize() - 1)
+		throw "out of bounds!";
+	node<T>* tmp = start;
+	while (index >= 0)
 	{
-		if (size == 1)
+		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
 		{
-			delete end;
-			end = nullptr;
-			start = nullptr;
+			index -= tmp->size;
+			tmp = tmp->next;
 		}
 		else
 		{
-			node<T>* tmp = end->prev;
-			delete end;
-			tmp->next = nullptr;
-			end = tmp;
+			(*tmp).filled[tmp->findMappedIndex(index % N)] = false;
+			tmp->size--;
+			deleteEmptyNode(tmp);
+			return;
 		}
-		size--;
 	}
-	end->pop();
 }
 
 template<typename T>
 void List<T>::print()
 {
-	for (int i = 0; i < getTotalSize(); i++)
+	for (int i = 0; i < getSize(); i++)
 		std::cout << (*this)[i] << " ";
 	std::cout << "\n";
 }
 
 template<typename T>
-size_t List<T>::getTotalSize()
+void List<T>::deleteEmptyNode(node<T>* emptyNode)
+{
+	if (emptyNode->size == 0)
+	{
+		if (blocksCount == 1)
+		{
+			delete emptyNode;
+			emptyNode = nullptr;
+			start = nullptr;
+		}
+		else if (emptyNode->next == nullptr) // end of list
+		{
+			node<T>* tmp = emptyNode->prev;
+			delete emptyNode;
+			tmp->next = nullptr;
+			end = tmp;
+		}
+		else if (emptyNode->prev == nullptr) // start of list
+		{
+			node<T>* tmp = emptyNode->next;
+			delete emptyNode;
+			tmp->prev = nullptr;
+			start = tmp;
+		}
+		else // in the middle
+		{
+			node<T>* next = emptyNode->next;
+			node<T>* prev = emptyNode->prev;
+			delete emptyNode;
+			next->prev = prev;
+			prev->next = next;
+		}
+		blocksCount--;
+	}
+}
+
+template<typename T>
+size_t List<T>::getSize()
 {
 	node<T>* tmp = start;
-	size_t size = 0;
+	size_t blocksCount = 0;
 	while (tmp != nullptr)
 	{
-		size += tmp->size;
+		blocksCount += tmp->size;
 		tmp = tmp->next;
 	}
-	return size;
+	return blocksCount;
 }
 
 
