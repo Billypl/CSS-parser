@@ -9,63 +9,97 @@
 #include "List.h"
 #include "List.cpp"
 #include "Section.h"
+#include "SectionHandler.h"
 
 using std::cout;
 using std::endl;
 
-void listTest();
-void sectionsTest();
+class CSSReader
+{
+
+public:
+
+	List<Section, BLOCK_SIZE> sections;
+	SectionHandler sectionHandler;
+	
+	bool isCommandBlockActive = false;
+
+	CSSReader()
+		: sectionHandler(&sections)
+	{
+		sections.add();
+	}
+	
+	void read()
+	{
+		while (true)
+		{
+			int ch = getchar();
+			if (ch == EOF)
+				return;
+			else if (ch == '?')
+				isCommandBlockActive = true;
+
+			if (isCommandBlockActive)
+				readCommands(ch);
+			else
+				sectionHandler.readSection(ch);
+		}
+	}
+	void readCommands(int ch)
+	{
+		// TODO: add commands handling
+	}
+	
+
+};
 
 int main()
 {
-	//listTest();
-	sectionsTest();
+	CSSReader reader;
+	reader.read();
+	cout << reader.sections;
 }
 
-Section createSection();
-Section createSection2();
+/*
+a {
+c: (a, b);
+d: (a1, b1);
+e: (a2, b2)
+}
 
-void sectionsTest()
 {
-	List<Section, BLOCK_SIZE> a;
-
-	a.add(createSection());
-	a.add(createSection2());
-
-	int i = 0,j = 0;
-	cout << "First: " << a[i].attributes[j].name << endl << endl;
-	cout << "Print whole list:\n" << " " << a;
+c: (a, b); d: (a1, b1); c: (a2, b2)
 }
 
-Section createSection()
+abc, dce 
+{ 
+color: 1px, 2px, 3px;
+text: "cos"
+}
+
+abc, dce
 {
-	Section res;
-
-	res.selectors.add("s1");
-	res.attributes.add({ "test1", "lol1" });
-	res.attributes.add({ "test2", "lol2" });
-	return res;
+color: 1px, 2px, 3px; text: "cos"; color: that
 }
-Section createSection2()
+
+
+
+#breadcrumb
 {
-	Section res;
-
-	res.selectors.add("s2");
-	res.attributes.add({ "test3", "lol3" });
-	res.attributes.add({ "test4", "lol4" });
-	return res;
+width: 80%;
+font-size: 9pt;
 }
 
-
-void listTest()
-{
-	List<int, BLOCK_SIZE> a, b;
-	a.add(1);
-	a.add(2);
-	b = a;
-
-	//a.pop(a.getSize() - 1);
-	//a.print();
-	cout << a << endl;
-	cout << b;
+h1, body {
+min-width: 780px;
+margin: 0;
+padding: 0;
+font-family: "Trebuchet MS", "Lucida Grande", Arial;
+font-size: 85%;
+color: #666666;
 }
+h1, h2, h3, h4, h5, h6 {color: #0066CB;}
+
+
+*/

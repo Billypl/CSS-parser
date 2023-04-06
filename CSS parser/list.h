@@ -23,6 +23,7 @@ public:
 	void pop(size_t index);
 
 	T& get(size_t index);
+	T& getLast();
 	T& operator[] (size_t index);
 	const T& operator[] (size_t index) const;
 	void operator=(const List& other);

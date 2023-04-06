@@ -52,6 +52,11 @@ public:
 	bool		isEqual	(const string& other) const;
 	bool		isEqual	(const char* other) const;
 	bool		isEqual	(const char& ch) const;
+	string		trimStart() const;
+	string		trimEnd() const;
+	string		trim() const;
+	vector<string> split(char separator);
+	static vector<string> split(const string& str, char separator);
 	friend std::ostream& operator<<(std::ostream& os, const string& dt);
 
 };

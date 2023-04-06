@@ -79,6 +79,12 @@ T& List<T, B_SIZE>::get(size_t index)
 }
 
 template<typename T, size_t B_SIZE>
+T& List<T, B_SIZE>::getLast()
+{
+	return (*end)[end->size - 1];
+}
+
+template<typename T, size_t B_SIZE>
 void List<T, B_SIZE>::operator=(const List& other)
 {
 	erease();

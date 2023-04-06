@@ -132,6 +132,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="Section.h" />
+    <ClInclude Include="SectionHandler.h" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="pair.cpp" />
     <ClCompile Include="Section.cpp" />
+    <ClCompile Include="SectionHandler.cpp" />
     <ClCompile Include="string.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>

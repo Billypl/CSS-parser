@@ -191,6 +191,53 @@ bool string::isEqual(const char& ch) const
 	return (size() == 1 && buffer[0] == ch);
 }
 
+string string::trimStart() const
+{
+	string tmp = (*this);
+	while (isspace(tmp.buffer[0]))
+		tmp.remove(0);
+	return tmp;
+}
+
+string string::trimEnd() const
+{
+	string tmp = (*this);
+	while (isspace(tmp[sbl::max(int(tmp.size() - 1), 0)]))
+		tmp.pop();
+	return tmp;
+}
+
+string string::trim() const
+{
+	string tmp = (*this);
+	tmp = tmp.trimStart();
+	tmp = tmp.trimEnd();
+	return tmp;
+}
+
+vector<string> string::split(char separator)
+{
+	return string::split((*this), separator);
+}
+
+vector<string> string::split(const string& str, char separator)
+{
+	vector<string> result;
+	string tmp;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (str[i] == separator)
+		{
+			result.add(tmp);
+			tmp.clear();
+		}
+		else
+			tmp += str[i];
+	}
+	result.add(tmp);
+	return result;
+}
+
 void string::clear()
 {
 	buffer.clear();

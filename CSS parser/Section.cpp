@@ -6,7 +6,7 @@
 Atr& Section::findAtr(string name)
 {
     size_t index = findAtrIndex(name);
-    if(index > attributes.getSize() - 1)
+    if(index > attributes.getSize())
         throw "there is no attribute with given name!";
     attributes[index];
 }
@@ -21,7 +21,7 @@ size_t Section::findAtrIndex(string name)
 
 std::ostream& operator<<(std::ostream& os, const Section& section)
 {
-    std::cout << section.selectors;
-    std::cout << section.attributes;
+    std::cout << "selectors: " << section.selectors;
+    std::cout << "attributes: " << section.attributes;
     return os;
 }
