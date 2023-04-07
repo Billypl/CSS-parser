@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Handleres">
+      <UniqueIdentifier>{5a4a17dd-9178-424b-85da-2485196d3158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handleres\Src">
+      <UniqueIdentifier>{5092b71f-8733-4ddd-a8b8-3aecfafe369a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handleres\Hdr">
+      <UniqueIdentifier>{f245f16a-e311-4272-8058-cb7f8c052513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handleres\TypeHandleres">
+      <UniqueIdentifier>{94817ef2-2aa1-4ad9-b5e0-7d56e37fb5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handleres\TypeHandleres\Hdr">
+      <UniqueIdentifier>{ebebba86-6321-4150-89bf-d446ec96d2d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handleres\TypeHandleres\Src">
+      <UniqueIdentifier>{39972cd2-8b9f-4d7e-8cd6-862a96d28972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h">
@@ -36,8 +54,23 @@
     <ClInclude Include="Section.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CommandHandler.h">
+      <Filter>Handleres\Hdr</Filter>
+    </ClInclude>
     <ClInclude Include="SectionHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Handleres\Hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSSReader.h">
+      <Filter>Handleres\Hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="ATypeCommandHandler.h">
+      <Filter>Handleres\TypeHandleres\Hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="STypeCommandHandler.h">
+      <Filter>Handleres\TypeHandleres\Hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="DTypeCommandHandler.h">
+      <Filter>Handleres\TypeHandleres\Hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,8 +95,23 @@
     <ClCompile Include="Section.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandHandler.cpp">
+      <Filter>Handleres\Src</Filter>
+    </ClCompile>
     <ClCompile Include="SectionHandler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Handleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="CSSReader.cpp">
+      <Filter>Handleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="DTypeCommandHandler.cpp">
+      <Filter>Handleres\TypeHandleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="STypeCommandHandler.cpp">
+      <Filter>Handleres\TypeHandleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="ATypeCommandHandler.cpp">
+      <Filter>Handleres\TypeHandleres\Src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

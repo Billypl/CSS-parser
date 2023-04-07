@@ -128,15 +128,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
+    <ClInclude Include="ATypeCommandHandler.h" />
+    <ClInclude Include="CommandHandler.h" />
+    <ClInclude Include="CSSReader.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="Section.h" />
     <ClInclude Include="SectionHandler.h" />
     <ClInclude Include="string.h" />
+    <ClInclude Include="STypeCommandHandler.h" />
     <ClInclude Include="vector.h" />
+    <ClInclude Include="DTypeCommandHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ATypeCommandHandler.cpp" />
+    <ClCompile Include="CommandHandler.cpp" />
+    <ClCompile Include="CSSReader.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -144,7 +152,9 @@
     <ClCompile Include="Section.cpp" />
     <ClCompile Include="SectionHandler.cpp" />
     <ClCompile Include="string.cpp" />
+    <ClCompile Include="STypeCommandHandler.cpp" />
     <ClCompile Include="vector.cpp" />
+    <ClCompile Include="DTypeCommandHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,11 @@
 #include "vector.h"
 #include "vector.cpp"
 #include "pair.cpp"
+#include "CSSReader.h"
+
+SectionHandler::SectionHandler()
+	: sections(CSSReader::sections) {}
+
 
 void SectionHandler::readSection(int ch)
 {

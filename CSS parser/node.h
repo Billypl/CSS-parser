@@ -1,16 +1,16 @@
 #pragma once
-#define BLOCK_SIZE 8
+#define BLOCK_SIZE 22
 
 
 template<typename T, size_t B_SIZE>
 class Node
 {
 public:
-	Node* prev = nullptr;
-	Node* next = nullptr;
 	T items[B_SIZE];
 	bool filled[B_SIZE];
 	size_t size = 0;
+	Node* prev = nullptr;
+	Node* next = nullptr;
 
 	size_t findLastFilledIndex();
 

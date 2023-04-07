@@ -5,16 +5,15 @@
 
 class SectionHandler
 {
+
 	List<Section, BLOCK_SIZE>& sections;
 	bool isSectionStarted = false;
 	bool isSectionEnded = false;
+
 public:
 
+	SectionHandler();
 	string input = "";
-
-	SectionHandler(List<Section, BLOCK_SIZE>* sections)
-		: sections(*sections) {}
-
 	void readSection(int ch);
 
 private:
