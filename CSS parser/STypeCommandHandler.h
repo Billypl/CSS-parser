@@ -16,12 +16,12 @@ public:
 
 	STypeCommandHandler();
 
-	void chooseCommand(const vector<string>& params);
+	void chooseCommand(const vector<string>& params, const string& command);
 
 	// count of sel in section "i" (skip if not)
-	void iSq(int i);
+	int iSq(int i);
 	// name of "j" sel for section "i" (skip if not)
-	void iSj(int i, int j);
+	string iSj(int i, int j);
 	// count of sel named "z" across all sections
-	void zSq(const string& z);
+	int zSq(const string& z);
 };

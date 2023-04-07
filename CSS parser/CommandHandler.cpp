@@ -22,13 +22,11 @@ void CommandHandler::readCommands(int ch)
 
 	if (isEmpty(command))
 	{
-		command.clear();
 		return;
 	}
 	else if (command.trim() == '?')
 	{
 		cout << "? == " << sections.getSize() << endl;
-		command.clear();
 	}
 	else
 	{
@@ -42,23 +40,24 @@ void CommandHandler::readCommands(int ch)
 		switch (type)
 		{
 		case 'A':
-			ACommandHandler.chooseCommand(params);
+			ACommandHandler.chooseCommand(params, command);
 			break;
 		case 'S':
-			SCommandHandler.chooseCommand(params);
+			SCommandHandler.chooseCommand(params, command);
 			break;
 		case 'E':
 			zEn(params[0], params[2]);
 			break;
 		case 'D':
-			DCommandHandler.chooseCommand(params);
+			DCommandHandler.chooseCommand(params, command);
 			break;
 		default:
 			command.clear();
 			break;
 		}
-		command.clear();
 	}
+	command.clear();
+
 }
 
 

@@ -14,7 +14,7 @@ public:
 
 	DTypeCommandHandler();
 
-	void chooseCommand(const vector<string>& params);
+	void chooseCommand(const vector<string>& params, const string& command);
 
 	// delete "i" section
 	void iDq(int i);
