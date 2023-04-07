@@ -14,6 +14,7 @@ class List
 public:
 
 	List();
+	List(const List& other);
 	~List();
 
 	size_t getSize() const;

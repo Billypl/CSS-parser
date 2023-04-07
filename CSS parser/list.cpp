@@ -6,6 +6,12 @@ List<T, B_SIZE>::List()
 	: start(nullptr), end(nullptr), blocksCount(0) {}
 
 template<typename T, size_t B_SIZE>
+List<T, B_SIZE>::List(const List& other)
+{
+	(*this) = other;
+}
+
+template<typename T, size_t B_SIZE>
 List<T, B_SIZE>::~List()
 {
 	erease();
@@ -14,7 +20,7 @@ List<T, B_SIZE>::~List()
 template<typename T, size_t B_SIZE>
 void List<T, B_SIZE>::add()
 {
-	T item;
+	T item{};
 	add(item);
 }
 
@@ -76,6 +82,7 @@ T& List<T, B_SIZE>::get(size_t index)
 		else
 			return (*tmp)[index % B_SIZE];
 	}
+	return (*tmp)[0]; // trash
 }
 
 template<typename T, size_t B_SIZE>
@@ -116,6 +123,8 @@ void List<T, B_SIZE>::pop(size_t index)
 		}
 		else
 		{
+			//TODO: use pop for node index
+			(*tmp).items[tmp->findMappedIndex(index % B_SIZE)] = T{};
 			(*tmp).filled[tmp->findMappedIndex(index % B_SIZE)] = false;
 			tmp->size--;
 			deleteEmptyNode(tmp);
@@ -146,15 +155,18 @@ void List<T, B_SIZE>::erease()
 	else if (blocksCount == 1)
 	{
 		delete end;
+		start = nullptr;
+		end = nullptr;
+		blocksCount--;
 		return;
 	}
 	Node<T, B_SIZE>* tmp = start->next;
-	do
+	while (tmp != nullptr) 
 	{
 		delete start;
 		start = tmp;
 		tmp = tmp->next;
-	} while (tmp != nullptr);
+	} 
 }
 
 template<typename T, size_t B_SIZE>

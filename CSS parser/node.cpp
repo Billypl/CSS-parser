@@ -50,9 +50,10 @@ template<typename T, size_t B_SIZE>
 void Node<T, B_SIZE>::pop()
 {
 	size--;
+	items[findLastFilledIndex()] = T{};
 	filled[findLastFilledIndex()] = false;
 }
-
+//TODO: pop for index
 template<typename T, size_t B_SIZE>
 Node<T, B_SIZE>::Node()
 {

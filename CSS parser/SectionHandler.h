@@ -8,9 +8,9 @@ class SectionHandler
 	List<Section, BLOCK_SIZE>& sections;
 	bool isSectionStarted = false;
 	bool isSectionEnded = false;
-	string input = "";
-
 public:
+
+	string input = "";
 
 	SectionHandler(List<Section, BLOCK_SIZE>* sections)
 		: sections(*sections) {}

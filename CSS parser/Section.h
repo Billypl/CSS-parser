@@ -14,8 +14,9 @@ public:
 	SelList selectors;
 	AtrList attributes;
 	
-	Atr& findAtr(string name);
-	size_t findAtrIndex(string name);
+	Atr& findAtr(const string& name);
+	size_t findAtrIndex(const string& name);
+	size_t findSelIndex(const string& name);
 
 	friend std::ostream& operator<<(std::ostream& os, const Section& section);
 
