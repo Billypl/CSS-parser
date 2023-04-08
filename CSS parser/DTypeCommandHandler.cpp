@@ -6,7 +6,7 @@
 #include "list.cpp"
 
 DTypeCommandHandler::DTypeCommandHandler()
-	: sections(CSSReader::sections), command(CommandHandler::command) {}
+	: sections(CSSReader::sections) {}
 
 
 void DTypeCommandHandler::chooseCommand(const vector<string>& params, const string& command)

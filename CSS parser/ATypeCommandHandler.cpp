@@ -17,6 +17,7 @@ void ATypeCommandHandler::chooseCommand(const vector<string>& params, const stri
 		string result;
 		if (params[2] == '?')
 		{
+			//TODO: remake to try catch
 			int i = sbl::stoiBool(params[0]);
 			if (i <= -1)
 				result = nAq(params[0]);

@@ -72,6 +72,9 @@
     <ClInclude Include="DTypeCommandHandler.h">
       <Filter>Handleres\TypeHandleres\Hdr</Filter>
     </ClInclude>
+    <ClInclude Include="ZTypeCommandHandler.h">
+      <Filter>Handleres\TypeHandleres\Hdr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="string.cpp">
@@ -111,6 +114,9 @@
       <Filter>Handleres\TypeHandleres\Src</Filter>
     </ClCompile>
     <ClCompile Include="ATypeCommandHandler.cpp">
+      <Filter>Handleres\TypeHandleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="ZTypeCommandHandler.cpp">
       <Filter>Handleres\TypeHandleres\Src</Filter>
     </ClCompile>
   </ItemGroup>

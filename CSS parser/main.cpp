@@ -8,9 +8,7 @@ using std::endl;
 
 int main()
 {
-	CSSReader reader;
-	reader.read();
-	//cout << reader.sections;
+	CSSReader::get().read();
 }
 
 

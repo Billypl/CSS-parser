@@ -6,6 +6,7 @@
 #include "ATypeCommandHandler.h"
 #include "STypeCommandHandler.h"
 #include "DTypeCommandHandler.h"
+#include "ZTypeCommandHandler.h"
 
 using std::cout;
 using std::endl;
@@ -22,18 +23,17 @@ public:
 	ATypeCommandHandler ACommandHandler;
 	STypeCommandHandler SCommandHandler;
 	DTypeCommandHandler DCommandHandler;
+	ZTypeCommandHandler ZCommandHandler;
 
 	CommandHandler();
 
-	void readCommands(int ch);
+	void readCommand(int ch);
 
 private:
 
-	// value of atr named "n" for sel named "z"
-	void zEn(const string& z, const string& n);
-
-	void readCommandLine(int ch);
-	bool isEmpty(const string& str);
+	void chooseCommand(vector<string>& params);
+	string readCommandLine(int ch);
+	bool isCommandEmpty();
 
 	bool isInvalidCharacter(int ch);
 

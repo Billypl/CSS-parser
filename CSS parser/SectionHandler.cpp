@@ -11,8 +11,11 @@ SectionHandler::SectionHandler()
 
 void SectionHandler::readSection(int ch)
 {
+	//TODO: fix guard clauses
 	if (isInvalidCharacter(ch))
+	{
 		return;
+	}
 	if (isSectionEnding(ch))
 	{
 		isSectionEnded = true;
@@ -70,13 +73,16 @@ void SectionHandler::saveAttribute()
 {
 	if (isEmpty(input))
 		return;
-	auto tmp = input.trim().split(':');
+	
+	input = input.trim();
+	vector<string> tmp = input.split(':');
+	Atr attribute = { tmp[0].trim(), tmp[1].trim() };
+	
 	try {
-		auto t = sections.getLast().findAtr(tmp[0].trim());
-		t.value = tmp[1].trim();
+		sections.getLast().findAtr(attribute.name).value = attribute.value;
 	}
 	catch (...) {
-		sections.getLast().attributes.add({ tmp[0].trim(), tmp[1].trim() });
+		sections.getLast().attributes.add(attribute);
 	}
 	input.clear();
 }

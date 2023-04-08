@@ -140,6 +140,7 @@
     <ClInclude Include="STypeCommandHandler.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="DTypeCommandHandler.h" />
+    <ClInclude Include="ZTypeCommandHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ATypeCommandHandler.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="STypeCommandHandler.cpp" />
     <ClCompile Include="vector.cpp" />
     <ClCompile Include="DTypeCommandHandler.cpp" />
+    <ClCompile Include="ZTypeCommandHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

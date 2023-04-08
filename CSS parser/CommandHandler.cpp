@@ -8,98 +8,76 @@
 #include "algorithm.h"
 #include "CSSReader.h"
 
+#define SUB 26
+
 const int CommandHandler::INDEX_OFFSET = -1;
 string CommandHandler::command = "";
 
 CommandHandler::CommandHandler()
 	: sections(CSSReader::sections) {}
 
-void CommandHandler::readCommands(int ch)
+void CommandHandler::readCommand(int ch)
 {
-	if (isInvalidCharacter(ch))
-		return;
-	readCommandLine(ch);
-
-	if (isEmpty(command))
-	{
-		return;
-	}
-	else if (command.trim() == '?')
+	command = readCommandLine(ch).trim();
+	if (command == '?')
 	{
 		cout << "? == " << sections.getSize() << endl;
 	}
-	else
+	else if(!isCommandEmpty())
 	{
-		command = command.trim();
 		vector<string> params = command.split(',');
-		char type = params[1][0];
-		params[0] = params[0].trim();
-		params[1] = params[1].trim();
-		params[2] = params[2].trim();
-
-		switch (type)
-		{
-		case 'A':
-			ACommandHandler.chooseCommand(params, command);
-			break;
-		case 'S':
-			SCommandHandler.chooseCommand(params, command);
-			break;
-		case 'E':
-			zEn(params[0], params[2]);
-			break;
-		case 'D':
-			DCommandHandler.chooseCommand(params, command);
-			break;
-		default:
-			command.clear();
-			break;
-		}
+		chooseCommand(params);
 	}
 	command.clear();
-
 }
 
-
-
-void CommandHandler::zEn(const string& z, const string& n)
+void CommandHandler::chooseCommand(vector<string>& params)
 {
-	// TODO: fix performance 
-	// (because of list nature iterating through it using index is slooow)
-	for (int i = sections.getSize() - 1; i >= 0; i--)
+	for (int i = 0; i < params.size(); i++)
+		params[i] = params[i].trim();
+	char type = params[1][0];
+
+	switch (type)
 	{
-		if (sections[i].findSelIndex(z) < sections[i].selectors.getSize())
-		{
-			if (sections[i].findAtrIndex(n) < sections[i].attributes.getSize())
-			{
-				cout << command << " == ";
-				cout << sections[i].findAtr(n).value << endl;
-				return;
-			}
-		}
+	case 'A':
+		ACommandHandler.chooseCommand(params, command);
+		break;
+	case 'S':
+		SCommandHandler.chooseCommand(params, command);
+		break;
+	case 'E':
+		ZCommandHandler.chooseCommand(params, command);
+		break;
+	case 'D':
+		DCommandHandler.chooseCommand(params, command);
+		break;
 	}
 }
 
 
-void CommandHandler::readCommandLine(int ch)
+string CommandHandler::readCommandLine(int ch)
 {
-	if (ch == '\n')
-		return;
-	do {
-		if (ch == EOF || ch == 26)
+	if (isInvalidCharacter(ch))
+		return "";
+
+	string command;
+	while (ch != '\n')
+	{
+		if (ch == EOF || ch == SUB)
 		{
-			//TODO: make it prettier?
 			ungetc(ch, stdin);
-			return;
+			return command;
 		}
 		command += char(ch);
-	} while ((ch = getchar()) != '\n');
+		ch = getchar();
+	}
+	return command;
 }
 
-bool CommandHandler::isEmpty(const string& str)
+bool CommandHandler::isCommandEmpty()
 {
-	for (int i = 0; i < str.size(); i++)
-		if (!isspace(str[i]))
+	for (int i = 0; i < command.size(); i++)
+		if (!isspace(command[i]))
 			return false;
 	return true;
 }
@@ -108,3 +86,4 @@ bool CommandHandler::isInvalidCharacter(int ch)
 {
 	return (ch < ' ' && !isspace(ch));
 }
+

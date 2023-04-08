@@ -8,26 +8,28 @@
 #include "SectionHandler.h"
 #include "CommandHandler.h"
 
+
 class CSSReader
 {
 
 public:
 
 	static List<Section, BLOCK_SIZE> sections;
-	SectionHandler sectionHandler;
-	CommandHandler commandHandler;
-
-	bool isCommandBlockActive = false;
-
-	CSSReader();
 
 	void read();
+	static CSSReader& get();
 
 private:
 
-	void readInputSeparator(int& ch);
+	SectionHandler sectionHandler;
+	CommandHandler commandHandler;
+
+	CSSReader();
+	int readCharAfterBlockSeparator(int& ch);
 	bool isStartOfCommandBlock(char ch);
 	bool isEndOfCommandBlock(char ch);
+
+	bool isCommandBlockActive(int& ch);
 
 };
 
