@@ -30,7 +30,7 @@ public:
 	void operator=(const List& other);
 	
 	void print() const;
-	bool isEmpty(); 
+	bool isEmpty() const; 
 	void erease();
 
 	template<typename T, size_t B_SIZE>

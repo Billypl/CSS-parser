@@ -67,6 +67,18 @@ void SectionHandler::saveSelector(int ch)
 	}
 	else
 		input += char(ch);
+
+	// TODO: List can be empty (everything is nullptr) - consider always having one free block
+	// below is avoiding adding problematic element - works, but list is badly programmed for that
+	// 
+	//if (!isSectionStarted)
+	//{
+	//	if (!input.trim().isEmpty())
+	//		sections.getLast().selectors.add(input.trim());
+	//	input.clear();
+	//}
+	//else
+	//	input += char(ch);
 }
 
 void SectionHandler::saveAttribute()

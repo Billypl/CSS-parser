@@ -33,7 +33,10 @@ void STypeCommandHandler::chooseCommand(const vector<string>& params, const stri
 int STypeCommandHandler::iSq(int i)
 {
 	i += CommandHandler::INDEX_OFFSET;
-	return sections[i].selectors.getSize();
+	const SelList& selectors = sections[i].selectors;
+	if (selectors.getSize() == 1 && selectors[0].trim().isEmpty())
+		return 0;
+	return selectors.getSize();
 }
 
 

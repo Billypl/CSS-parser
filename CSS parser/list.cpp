@@ -142,7 +142,7 @@ void List<T, B_SIZE>::print() const
 }
 
 template<typename T, size_t B_SIZE>
-bool List<T, B_SIZE>::isEmpty()
+bool List<T, B_SIZE>::isEmpty() const
 {
 	return getSize() == 0;
 }
