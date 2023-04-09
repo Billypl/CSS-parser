@@ -75,6 +75,9 @@
     <ClInclude Include="ZTypeCommandHandler.h">
       <Filter>Handleres\TypeHandleres\Hdr</Filter>
     </ClInclude>
+    <ClInclude Include="ListIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="string.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="ZTypeCommandHandler.cpp">
       <Filter>Handleres\TypeHandleres\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="ListIterator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

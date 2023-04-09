@@ -9,6 +9,12 @@ size_t Node<T, B_SIZE>::findLastFilledIndex()
 	return -1;
 }
 
+template<typename T, size_t B_SIZE>
+T& Node<T, B_SIZE>::getLast()
+{
+	return items[findLastFilledIndex()];
+}
+
 
 template<typename T, size_t B_SIZE>
 void Node<T, B_SIZE>::add(const T& item)

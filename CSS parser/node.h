@@ -13,6 +13,7 @@ public:
 	Node* next = nullptr;
 
 	size_t findLastFilledIndex();
+	T& getLast();
 
 	void add(const T& item);
 	T& operator[] (size_t index);

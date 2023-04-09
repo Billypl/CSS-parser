@@ -1,9 +1,13 @@
 #include "List.h"
 #include <iostream>
+#include "ListIterator.h"
+#include "ListIterator.cpp"
+#include "Node.cpp"
+
 
 template<typename T, size_t B_SIZE>
 List<T, B_SIZE>::List()
-	: start(nullptr), end(nullptr), blocksCount(0) {}
+	: first(nullptr), last(nullptr), blocksCount(0) {}
 
 template<typename T, size_t B_SIZE>
 List<T, B_SIZE>::List(const List& other)
@@ -30,29 +34,28 @@ void List<T, B_SIZE>::add(const T& item)
 	if (blocksCount == 0)
 	{
 		Node<T, B_SIZE>* tmp = new Node<T, B_SIZE>;
-		start = tmp;
-		end = tmp;
+		first = tmp;
+		last = tmp;
 		blocksCount++;
 	}
 
 	while (true)
 	{
 		try {
-			end->add(item);
+			last->add(item);
 			return;
 		}
 		catch (...)
 		{
 			Node<T, B_SIZE>* tmp = new Node<T, B_SIZE>;
-			end->next = tmp;
-			tmp->prev = end;
+			last->next = tmp;
+			tmp->prev = last;
 
-			end = tmp;
+			last = tmp;
 			blocksCount++;
 		}
 	}
 }
-
 
 template<typename T, size_t B_SIZE>
 T& List<T, B_SIZE>::operator[](size_t index)
@@ -71,7 +74,7 @@ T& List<T, B_SIZE>::get(size_t index)
 {
 	if (index > getSize() - 1)
 		throw "out of bounds!";
-	Node<T, B_SIZE>* tmp = start;
+	Node<T, B_SIZE>* tmp = first;
 	while (index >= 0)
 	{
 		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
@@ -88,7 +91,7 @@ T& List<T, B_SIZE>::get(size_t index)
 template<typename T, size_t B_SIZE>
 T& List<T, B_SIZE>::getLast()
 {
-	return (*end)[end->size - 1];
+	return (*last)[last->size - 1];
 }
 
 template<typename T, size_t B_SIZE>
@@ -100,12 +103,24 @@ void List<T, B_SIZE>::operator=(const List& other)
 }
 
 template<typename T, size_t B_SIZE>
+typename List<T, B_SIZE>::Iterator List<T, B_SIZE>::begin()
+{
+	return List<T, B_SIZE>::Iterator(first, &(*first)[0]);
+}
+
+template<typename T, size_t B_SIZE>
+typename List<T, B_SIZE>::Iterator List<T, B_SIZE>::end()
+{
+	return List<T, B_SIZE>::Iterator(last, &(last->getLast()) + 1);
+}
+
+template<typename T, size_t B_SIZE>
 void List<T, B_SIZE>::pop()
 {
-	if (blocksCount == 0 || start->size == 0)
+	if (blocksCount == 0 || first->size == 0)
 		throw "list is empty!";
-	deleteEmptyNode(end);
-	end->pop();
+	deleteEmptyNode(last);
+	last->pop();
 }
 
 template<typename T, size_t B_SIZE>
@@ -113,7 +128,7 @@ void List<T, B_SIZE>::pop(size_t index)
 {
 	if (index > getSize() - 1)
 		throw "out of bounds!";
-	Node<T, B_SIZE>* tmp = start;
+	Node<T, B_SIZE>* tmp = first;
 	while (index >= 0)
 	{
 		if (tmp->findMappedIndex(index) == -1 && tmp->next != nullptr)
@@ -154,17 +169,17 @@ void List<T, B_SIZE>::erease()
 		return;
 	else if (blocksCount == 1)
 	{
-		delete end;
-		start = nullptr;
-		end = nullptr;
+		delete last;
+		first = nullptr;
+		last = nullptr;
 		blocksCount--;
 		return;
 	}
-	Node<T, B_SIZE>* tmp = start->next;
+	Node<T, B_SIZE>* tmp = first->next;
 	while (tmp != nullptr) 
 	{
-		delete start;
-		start = tmp;
+		delete first;
+		first = tmp;
 		tmp = tmp->next;
 	} 
 }
@@ -178,21 +193,21 @@ void List<T, B_SIZE>::deleteEmptyNode(Node<T, B_SIZE>* emptyNode)
 		{
 			delete emptyNode;
 			emptyNode = nullptr;
-			start = nullptr;
+			first = nullptr;
 		}
 		else if (emptyNode->next == nullptr) // end of list
 		{
 			Node<T, B_SIZE>* tmp = emptyNode->prev;
 			delete emptyNode;
 			tmp->next = nullptr;
-			end = tmp;
+			last = tmp;
 		}
 		else if (emptyNode->prev == nullptr) // start of list
 		{
 			Node<T, B_SIZE>* tmp = emptyNode->next;
 			delete emptyNode;
 			tmp->prev = nullptr;
-			start = tmp;
+			first = tmp;
 		}
 		else // in the middle
 		{
@@ -209,7 +224,7 @@ void List<T, B_SIZE>::deleteEmptyNode(Node<T, B_SIZE>* emptyNode)
 template<typename T, size_t B_SIZE>
 size_t List<T, B_SIZE>::getSize() const
 {
-	Node<T, B_SIZE>* tmp = start;
+	Node<T, B_SIZE>* tmp = first;
 	size_t size = 0;
 	while (tmp != nullptr)
 	{

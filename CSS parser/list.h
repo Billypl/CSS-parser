@@ -1,14 +1,22 @@
 #pragma once
 #include <iostream>
 #include "Node.h"
-#include "Node.cpp"
 #include <array>
+#include "ListIterator.h"
 
 template<typename T, size_t B_SIZE>
 class List
 {
-	Node<T, B_SIZE>* start;
-	Node<T, B_SIZE>* end;
+public:
+
+	using ValueType = T;
+	using NodeType = Node<T, B_SIZE>;
+	using Iterator = ListIterator<List<T, B_SIZE>>;
+
+private:
+
+	Node<T, B_SIZE>* first;
+	Node<T, B_SIZE>* last;
 	size_t blocksCount;
 
 public:
@@ -28,6 +36,9 @@ public:
 	T& operator[] (size_t index);
 	const T& operator[] (size_t index) const;
 	void operator=(const List& other);
+	
+	Iterator begin();
+	Iterator end();
 	
 	void print() const;
 	bool isEmpty() const; 

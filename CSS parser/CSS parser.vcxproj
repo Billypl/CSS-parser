@@ -132,6 +132,7 @@
     <ClInclude Include="CommandHandler.h" />
     <ClInclude Include="CSSReader.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="ListIterator.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="Section.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="CommandHandler.cpp" />
     <ClCompile Include="CSSReader.cpp" />
     <ClCompile Include="List.cpp" />
+    <ClCompile Include="ListIterator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="pair.cpp" />
